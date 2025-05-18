@@ -17,6 +17,7 @@ export async function readAllFilesInDir(dir: string): Promise<FileWithContent[]>
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
 
+        // if its an folder, then recursivly go in that dir and read files
         if (entry.isDirectory()) {
             const nestedResults = await readAllFilesInDir(fullPath);
             results = results.concat(nestedResults);
@@ -26,17 +27,19 @@ export async function readAllFilesInDir(dir: string): Promise<FileWithContent[]>
             try {
                 const content = await fs.readFile(fullPath, 'utf-8');
                 
+                // storing each filepath and its content
                 results.push({ filePath: fullPath, content });
                 
-                results.push({
-                    filePath: fullPath,
-                    content,
-                });
+                // results.push({
+                //     filePath: fullPath,
+                //     content,
+                // });
             } catch (err) {
                 console.error(`❌ Failed to read file: ${fullPath}`, err);
             }
         }
         }
     }
-  return results;
+    // it will return each file with its content
+    return results;
 }

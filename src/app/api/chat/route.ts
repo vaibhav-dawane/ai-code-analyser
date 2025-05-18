@@ -7,8 +7,10 @@ export async function GET()
 {
   const repoPath = process.cwd() + '/src/temp';
 
+  // each file with its content
   const results = await readAllFilesInDir(repoPath);
 
+  // it will anaylse each file code, and return an map with file location and bugs present inside it
   const response = await analyzeFiles(results);
 
   return NextResponse.json({response}, {status: 200});
