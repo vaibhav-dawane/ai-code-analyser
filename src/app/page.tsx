@@ -9,7 +9,7 @@ export default function Home() {
 
 function UseHome(){
   const session = useSession();
-  console.log(JSON.stringify(session));
+  // console.log(JSON.stringify(session));
   return <div>
     {session.status === 'authenticated' ? <button onClick={() => signOut()}>SignOut</button> : 
     <button onClick={() => signIn()}>SignIn</button>}
