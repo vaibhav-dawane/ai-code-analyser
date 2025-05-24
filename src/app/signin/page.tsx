@@ -5,7 +5,9 @@ export default function Component() {
 //   const { data: session } = useSession()
   return (
     <>
-      
+      <div>
+        hello
+      </div>
     </>
   )
 }

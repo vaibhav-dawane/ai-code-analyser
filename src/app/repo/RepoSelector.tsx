@@ -38,10 +38,19 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
         console.log("Response after Cloning Repo: ", res);
 
         if (res.ok) {
-            await fetch('/api/chat', {
+            const res = await fetch('/api/chat', {
                 method: 'POST',
                 body: JSON.stringify(data)
             })
+
+            const results = await res.json();
+
+            if (results.response) {
+                await fetch('api/saveIssues', {
+                    method: 'POST',
+                    body: JSON.stringify(results)
+                })
+            }
         }
         else {
             throw new Error("Repo Clone Failed");
