@@ -12,6 +12,8 @@ const allowedExtensions = ['.ts', '.tsx', '.js', '.jsx', '.py', '.java', '.go', 
 // if the file is without extension (also we can take user input)
 const allowedFileWithoutExtension = ['Dockerfile'];
 
+const notAllowedDirectory = ['node_modules', 'AI Chat'];
+
 export async function readAllFilesInDir(dir: string): Promise<FileWithContent[]> {
     let results: FileWithContent[] = [];
 
@@ -22,8 +24,10 @@ export async function readAllFilesInDir(dir: string): Promise<FileWithContent[]>
 
         // if its an folder, then recursivly go in that dir and read files
         if (entry.isDirectory()) {
-            const nestedResults = await readAllFilesInDir(fullPath);
-            results = results.concat(nestedResults);
+            if (!notAllowedDirectory.includes(entry.name)) {
+                const nestedResults = await readAllFilesInDir(fullPath);
+                results = results.concat(nestedResults);
+            }
         } else if (entry.isFile()) {
             const ext = path.extname(fullPath);
             const fileName = path.basename(fullPath);
