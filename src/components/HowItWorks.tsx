@@ -1,21 +1,26 @@
-import { Bot, GitCommit, GitPullRequest } from "lucide-react";
+import { Bot, Check, GitCommit, GitPullRequest } from "lucide-react";
 
 export const HowItWorks = () => {
     const timeline = [
         {
             title: "Connect Your Repository",
-            description: "Link your GitHub, GitLab, or Bitbucket repository to our platform in just a few clicks.",
+            description: "Securely authenticate with GitHub and grant access to the repository you want to analyze.",
             icon: <GitCommit />
         },
         {
-            title: "Create a Pull Request",
-            description: "When you create a pull request, our AI automatically begins analyzing your code.",
+            title: "Select a Repository",
+            description: "Choose a repository to scan — no need to create a pull request to begin the analysis.",
             icon: <GitPullRequest />
         },
         {
             title: "AI Reviews Your Code",
-            description: "Our AI examines your code for bugs, security issues, and style violations in seconds.",
+            description: "Our AI scans your codebase for bugs, potential issues, and optimization opportunities within seconds.",
             icon: <Bot />
+        },
+        {
+            title: "Reviews Suggestions",
+            description: "View AI-generated insights and recommendations — accept, ignore, or customize them as needed.",
+            icon: <Check />
         },
     ]
     return (
@@ -25,7 +30,7 @@ export const HowItWorks = () => {
             </div>
             <div className="w-full mt-8 flex justify-center relative overflow-x-hidden">
                 <div className="absolute top-0 bottom-0 hidden md:block w-[4px] bg-gradient-to-b from-blue-500 to-purple-600" />
-                <div className="w-full mx-10 space-y-24 px-4 relative">
+                <div className="w-full mx-10 space-y-[48px] px-4 relative">
                     {
                         timeline.map((item, index) => (
                             <div key={index} className="w-full relative flex flex-col md:flex-row items-center md:items-start">
@@ -34,12 +39,44 @@ export const HowItWorks = () => {
                                         {item.icon}
                                     </div>
                                 </div>
-                                <div className={`w-full ${index % 2 === 0 ? "text-right justify-start" : "text-left justify-end"} flex`}>
+
+                                <div className="w-full flex">
+                                    {index % 2 === 0 ? (
+                                        <>
+                                            {/* Left side (even index): show content */}
+                                            <div className="w-1/2 flex justify-end">
+                                                <div className="max-w-xs text-right mr-16">
+                                                    <h1 className="text-[16px] font-semibold">{item.title}</h1>
+                                                    <p className="mt-2 text-[14px] text-gray-400">{item.description}</p>
+                                                </div>
+                                            </div>
+
+                                            {/* Right side: empty placeholder */}
+                                            <div className="w-1/2" />
+                                        </>
+                                    ) : (
+                                        <>
+                                            {/* Left side: empty placeholder */}
+                                            <div className="w-1/2" />
+
+                                            {/* Right side (odd index): show content */}
+                                            <div className="w-1/2 flex justify-start">
+                                                <div className="max-w-xs text-left ml-16">
+                                                    <h1 className="text-[16px] font-semibold">{item.title}</h1>
+                                                    <p className="mt-2 text-[14px] text-gray-400">{item.description}</p>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+
+
+                                {/* <div className={`w-full ${index % 2 === 0 ? "text-right justify-start" : "text-left justify-end"} flex`}>
                                     <div className="max-w-xs">
                                         <h1 className="text-[16px] font-semibold">{item.title}</h1>
                                         <p className="mt-2 text-[14px] text-gray-400">{item.description}</p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         ))
                     }
