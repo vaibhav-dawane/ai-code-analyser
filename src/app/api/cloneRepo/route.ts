@@ -5,7 +5,7 @@ import { promisify } from "util";
 type Payload = {
     repoToken: string,
     repoOwner: string,
-    selectedRepo: string
+    selected: string
 }
 
 export async function POST(req: NextRequest) {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     console.log("data in clone route: ", data);
     const token = data.repoToken;
     const owner = data.repoOwner;
-    const repo = data.selectedRepo;
+    const repo = data.selected;
     const folder = `./src/temp/${owner}/${repo}`
 
     const command = `git clone https://${token}@github.com/${owner}/${repo}.git ${folder}`;

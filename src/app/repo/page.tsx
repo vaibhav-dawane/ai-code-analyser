@@ -1,7 +1,5 @@
 import { cookies } from "next/headers";
 import RepoSelector from "./RepoSelector";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 
 const ReposPage = async () => {
     const cookieStore = await cookies();
@@ -11,10 +9,6 @@ const ReposPage = async () => {
             cookie: cookieStore.toString()
         }
     });
-
-    const session = await getServerSession(authOptions)
-
-    // console.log("Session data", session );
     
     if (!res.ok) {
         console.error("Failed to fetch repositories", res.text());
@@ -25,7 +19,9 @@ const ReposPage = async () => {
     const repoNames = repos.repositories;
     // console.log("All the repo names: ",repoNames);
 
-    return <RepoSelector repoNames={repoNames} />
+    return (
+        <RepoSelector repoNames={repoNames} />
+    );
 }
 
 export default ReposPage;

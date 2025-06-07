@@ -1,32 +1,42 @@
 import { authOptions } from "@/lib/auth";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
-export async function POST(req: NextRequest)
-{
+export async function POST(req: NextRequest) {
     const data = await req.json();
-    console.log("Data received in saveIssues Route: ", data.response);
+    const issuesFound = data.response;
+    const repoName = data.repoName;
+    console.log("Data received in saveIssues Route: ", issuesFound);
 
     const session = await getServerSession(authOptions);
 
     const user = await prisma.user.findUnique({
-        where: {username: session?.username},
+        where: { username: session?.username },
     })
 
-    if(!user)
-    {
-        return NextResponse.json({message: "User Not Found"}, {status: 401});
+    if (!user) {
+        return NextResponse.json({ message: "User Not Found" }, { status: 401 });
     }
 
-    await prisma.website.create({
-        data: {
-            userId: user.id,
-            issues: data.response
-        }
-    })
+    if (Object.keys(issuesFound).length === 0) {
+        await prisma.issue.create({
+            data: {
+                userId: user.id,
+                issues: {message: "No Issues Found"},
+                repoName: repoName
+            }
+        })
+    }else {
+        await prisma.issue.create({
+            data: {
+                userId: user.id,
+                issues: data.response,
+                repoName: repoName
+            }
+        })
+    }
+
     // console.log("Data Received Successful");
-    return NextResponse.json({message: "Data Stored Successful"}, {status: 201});
+    return NextResponse.json({ message: "Data Stored Successful" }, { status: 201 });
 }

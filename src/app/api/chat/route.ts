@@ -5,12 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 type Payload = {
   repoOwner: string,
-  selectedRepo: string
+  selected: string
 }
 
 export async function POST(req: NextRequest) {
   const data: Payload = await req.json();
-  const repoPath = process.cwd() + `/src/temp/${data.repoOwner}/${data.selectedRepo}`;
+  const repoPath = process.cwd() + `/src/temp/${data.repoOwner}/${data.selected}`;
 
   // each file with its content
   const results = await readAllFilesInDir(repoPath);

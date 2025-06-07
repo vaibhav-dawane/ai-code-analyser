@@ -10,16 +10,17 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   name         String
-  username     String    @unique
+  username     String   @unique
   access_token String
-  website      Website[]
+  website      Issue[]
 }
 
-model Website {
-  id     Int      @id @default(autoincrement())
-  user   User     @relation(fields: [userId], references: [id])
-  userId String
-  issues Json
+model Issue {
+  id       Int    @id @default(autoincrement())
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
+  repoName String
+  issues   Json
 }
