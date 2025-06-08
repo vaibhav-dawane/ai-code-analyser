@@ -5,9 +5,9 @@ export const Footer = () => {
         <div className="mt-36 w-full h-48 bg-gray-950 border-t border-gray-800">
             <div className="w-full flex h-2/3 items-center justify-center">
                 <div className="flex-row mt-4">
-                    <div className="flex justify-center items-center space-x-2">
-                        <Code2 className="w-6 h-6 text-blue-500" />
-                        <span className="text-xl bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold">AI CommitIQ</span>
+                    <div className="flex justify-center items-center space-x-2  select-none">
+                        <Code2 className="w-6 h-6 text-blue-500 cursor-pointer" />
+                        <span className="text-xl bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-semibold cursor-pointer">AI CommitIQ</span>
                     </div>
                     <p className="mt-1 text-sm text-gray-400 w-80 text-center">Review code faster with AI-driven insights and clean, reliable suggestions.</p>
                 </div>

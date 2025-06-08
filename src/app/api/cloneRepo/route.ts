@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { exec } from 'child_process';
 import { promisify } from "util";
+import fs from 'fs';
+import path from "path";
 
 type Payload = {
     repoToken: string,
@@ -18,6 +20,9 @@ export async function POST(req: NextRequest) {
 
     const command = `git clone https://${token}@github.com/${owner}/${repo}.git ${folder}`;
 
+    if(fs.existsSync(folder)) {
+        fs.rmSync(folder, { recursive: true, force: true });
+    }
     const execAsync = promisify(exec);
 
     try {

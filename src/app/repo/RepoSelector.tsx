@@ -4,9 +4,10 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useSession } from "next-auth/react";
-import { LoaderCircle } from 'lucide-react';
+import { Code2, LoaderCircle } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'
 
 export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
     const [selected, setSelected] = useState("Choose a repo")
@@ -20,6 +21,11 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
     const router = useRouter();
 
     const analyseRepo = async () => {
+
+        if (selected === "Choose a repo") {
+            toast.error("Select a Correct Repository!");
+            return;
+        }
         setLoading(true);
         const data = {
             repoToken, repoOwner, selected
@@ -60,7 +66,13 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
     }
 
     return (
-        <div className='w-full h-screen flex flex-col justify-center items-center'>
+        <div className='w-full h-screen flex flex-col justify-center items-center relative'>
+            <Link href='/'>
+                <div className="absolute md:left-10 md:top-6 flex items-center cursor-pointer select-none">
+                    <Code2 className="w-6 h-6 text-blue-500" />
+                    <span className="ml-2 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold">AI CommitIQ</span>
+                </div>
+            </Link>
             <Toaster />
             <div className='flex items-center'>
                 <div className='w-36'>
