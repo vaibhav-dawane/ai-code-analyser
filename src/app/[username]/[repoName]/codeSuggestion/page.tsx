@@ -20,7 +20,7 @@ export default async function codeSuggestion({ params }: Props) {
         body: JSON.stringify(data)
     })
     const result = await res.json();
-    // console.log("Data received in getIssue: ", result.issues.issues);
+    console.log("Data received in getIssue: ", result.issues.issues);
     
     return (
         <ShowIssues repoIssues={result.issues.issues}/>

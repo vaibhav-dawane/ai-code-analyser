@@ -48,13 +48,13 @@ function calculateTotal(items) {
     }, []);
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full max-w-screen flex justify-center">
             <div className="flex-row">
-                <div className="mt-10 text-4xl font-bold text-center">
+                <div className="mt-10 text-2xl md:text-4xl font-bold text-center">
                     AI Code Reviewer
                 </div>
                 <div className="grid grid-cols-1 gap-y-10 mt-8">
-                    <div className="w-[600px] h-full border border-gray-800 bg-gray-950 rounded-xl mb-4 overflow-hidden">
+                    <div className="w-[350px] md:w-[600px] h-full border border-gray-800 bg-gray-950 rounded-xl mb-4 overflow-hidden">
                         <div className="w-full h-7 rounded-t-xl bg-gray-900 px-4 flex items-center space-x-1.5">
                             <div className="w-3 h-3 rounded-full bg-red-500"></div>
                             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -63,7 +63,7 @@ function calculateTotal(items) {
                         </div>
                         <div className="mt-3 ml-3 flex items-center">
                             <div className="rounded-full bg-cyan-600 p-1 w-6 h-6 text-md flex justify-center items-center">AI</div>
-                            <div className="ml-3 text-sm text-cyan-500 font-semibold">{steps[currentStep].comment}</div>
+                            <div className="ml-3 text-xs md:text-sm text-cyan-500 font-semibold">{steps[currentStep].comment}</div>``
                         </div>
 
                         <div className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`} >

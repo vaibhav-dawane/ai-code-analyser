@@ -33,5 +33,6 @@ export const config = {
         '/api/auth',
         '/repo',
         '/signin',
+        '/[username]/[repoName]/codeSuggestion'
     ],
 }

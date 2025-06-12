@@ -24,12 +24,12 @@ export const HowItWorks = () => {
         },
     ]
     return (
-        <div className="mt-16">
-            <div className="mt-4 text-2xl font-semibold flex justify-center">
+        <div className="mt-28">
+            <div className="mt-4 text-2xl md:text-4xl font-semibold flex justify-center">
                 How It Works?
             </div>
-            <div className="w-full mt-8 flex justify-center relative overflow-x-hidden">
-                <div className="absolute top-0 bottom-0 hidden md:block w-[4px] bg-gradient-to-b from-blue-500 to-purple-600" />
+            <div className="w-full mt-12 flex justify-center relative md:overflow-x-hidden">
+                <div className="absolute top-0 bottom-0 block w-[3px] bg-gradient-to-b from-blue-500 to-purple-600" />
                 <div className="w-full mx-10 space-y-[48px] px-4 relative">
                     {
                         timeline.map((item, index) => (
@@ -45,9 +45,9 @@ export const HowItWorks = () => {
                                         <>
                                             {/* Left side (even index): show content */}
                                             <div className="w-1/2 flex justify-end">
-                                                <div className="max-w-xs text-right mr-16">
-                                                    <h1 className="text-[16px] font-semibold">{item.title}</h1>
-                                                    <p className="mt-2 text-[14px] text-gray-400">{item.description}</p>
+                                                <div className="max-w-xs text-right mr-12 md:mr-16">
+                                                    <h1 className="text-[13px] md:text-[16px] font-semibold">{item.title}</h1>
+                                                    <p className="mt-2 text-[14px] text-gray-400 hidden md:block">{item.description}</p>
                                                 </div>
                                             </div>
 
@@ -61,9 +61,9 @@ export const HowItWorks = () => {
 
                                             {/* Right side (odd index): show content */}
                                             <div className="w-1/2 flex justify-start">
-                                                <div className="max-w-xs text-left ml-16">
-                                                    <h1 className="text-[16px] font-semibold">{item.title}</h1>
-                                                    <p className="mt-2 text-[14px] text-gray-400">{item.description}</p>
+                                                <div className="max-w-xs text-left ml-12 md:ml-16">
+                                                    <h1 className="text-[13px] md:text-[16px] font-semibold">{item.title}</h1>
+                                                    <p className="mt-2 text-[14px] text-gray-400 hidden md:block">{item.description}</p>
                                                 </div>
                                             </div>
                                         </>
