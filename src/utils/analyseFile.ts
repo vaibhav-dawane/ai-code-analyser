@@ -7,12 +7,18 @@ type FileWithContent = {
     content: string;
 };
 
+interface Issue {
+  line: number;
+  type: 'bug' | 'error' | 'warning' | 'optimization'; // expand as needed
+  message: string;
+}
+
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API });
 
 export async function analyzeFiles(files: FileWithContent[]) {
 
     // to store rsponse, in map format. Filepath and its bugs
-    const fileWithIssue: Record<string, any[]> = {};
+    const fileWithIssue: Record<string, Issue[]> = {};
 
     // iterate each file
     for (const file of files) {
@@ -37,7 +43,7 @@ export async function analyzeFiles(files: FileWithContent[]) {
             try {
                 parsed = JSON.parse(jsonString);
             } catch (error) {
-                console.warn("⚠️ Failed to parse JSON:", jsonString);
+                console.warn("⚠️ Failed to parse JSON:", jsonString, "Error Occured: ", error);
                 continue;
             }
 

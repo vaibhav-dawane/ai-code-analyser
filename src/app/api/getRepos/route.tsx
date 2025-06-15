@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
     // console.log("Data after parsing: ",data);
 
-    let repoNames: string[] = [];
+    const repoNames: string[] = [];
 
     data.map((items: { name: string }) => {
         repoNames.push(items.name)

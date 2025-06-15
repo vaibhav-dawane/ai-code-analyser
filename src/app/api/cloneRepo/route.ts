@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { exec } from 'child_process';
 import { promisify } from "util";
 import fs from 'fs';
-import path from "path";
 
 type Payload = {
     repoToken: string,
