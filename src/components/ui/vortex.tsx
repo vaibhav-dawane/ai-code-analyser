@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
@@ -190,7 +192,7 @@ export const Vortex = (props: VortexProps) => {
 
   const resize = (
     canvas: HTMLCanvasElement,
-    // ctx?: CanvasRenderingContext2D
+    ctx?: CanvasRenderingContext2D
   ) => {
     const { innerWidth, innerHeight } = window;
 
