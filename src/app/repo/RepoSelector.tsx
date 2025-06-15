@@ -66,19 +66,19 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
     }
 
     return (
-        <div className='w-full h-screen flex flex-col justify-center items-center relative'>
+        <div className='w-full h-screen relative flex flex-col justify-center items-center'>
             <Link href='/'>
-                <div className="absolute md:left-10 md:top-6 flex items-center cursor-pointer select-none">
-                    <Code2 className="w-6 h-6 text-blue-500" />
-                    <span className="ml-2 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold">AI CommitIQ</span>
+                <div className="absolute left-6 md:left-10 top-4 md:top-6 flex items-center cursor-pointer select-none">
+                    <Code2 className="w-5 md:w-6 h-5 md:h-6 text-blue-500" />
+                    <span className="ml-2 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold text-sm md:text-xl">AI CommitIQ</span>
                 </div>
             </Link>
             <Toaster />
-            <div className='flex items-center'>
-                <div className='w-36'>
+            <div className='flex md:flex-row flex-col items-center justify-center'>
+                <div className='md:w-36 w-34 text-sm md:text-md text-center md:text-left'>
                     Select a Repository
                 </div>
-                <div className="ml-4 w-64">
+                <div className="ml-4 md:w-64 w-52 mt-4 md:mt-0">
                     <Listbox value={selected} onChange={setSelected}>
                         <ListboxButton
                             className={clsx(
@@ -115,7 +115,7 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
                 </div>
             </div>
 
-            <div className='flex mt-6 p-2 px-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md border border-blue-500 cursor-pointer transform duration-200 hover:scale-105' onClick={analyseRepo}>
+            <div className='flex mt-6 p-1 md:p-2 px-2 md:px-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md border border-blue-500 cursor-pointer transform duration-200 hover:scale-105 text-sm md:text-lg' onClick={analyseRepo}>
                 Start Analysing
                 {
                     loading && (

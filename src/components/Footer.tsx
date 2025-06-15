@@ -1,4 +1,6 @@
-import { Code2, Github, GithubIcon, Linkedin, X } from "lucide-react";
+import { Code2, X } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa6";
 
 export const Footer = () => {
     return (
@@ -16,9 +18,9 @@ export const Footer = () => {
                 <div className="absolute w-2/3 md:w-1/2 h-[1px] bg-gray-500 top-0 left-1/2 -translate-x-1/2"/>
                 <div className="font-semibold text-xs md:text-lg text-gray-400">Copyright © 2025 - All right reserved</div>
                 <div className="flex space-x-2 md:space-x-4">
-                    <Github className="h-4 md:h-6 w-4 md:w-6 cursor-pointer" />
+                    <FaGithub className="h-4 md:h-6 w-4 md:w-6 cursor-pointer" />
                     <X className="h-4 md:h-6 w-4 md:w-6 cursor-pointer" />
-                    <Linkedin className="h-4 md:h-6 w-4 md:w-6 cursor-pointer" />
+                    <FaLinkedinIn className="h-4 md:h-6 w-4 md:w-6 cursor-pointer" />
                 </div>
             </div>
         </div>
