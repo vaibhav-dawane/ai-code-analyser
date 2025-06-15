@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/@typescript-eslint/no-unused-vars */
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
