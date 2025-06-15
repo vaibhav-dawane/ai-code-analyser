@@ -1,15 +1,14 @@
 import ShowIssues from "./ShowIssues";
 
-interface Props {
+type Props = {
     params: {
-        username: string,
-        repoName: string
+        username: string;
+        repoName: string;
     }
 }
 
 export default async function codeSuggestion({ params }: Props) {
-    const awaitedParams = await params;
-    const { username, repoName } = awaitedParams;
+    const { username, repoName } = params;
     const data = {
         username,
         repoName
