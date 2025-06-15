@@ -1,10 +1,14 @@
 import ShowIssues from "./ShowIssues";
 
+interface Params {
+  username: string;
+  repoName: string;
+}
 
 export default async function codeSuggestion({
   params,
 }: {
-  params: { username: string; repoName: string };
+  params: Params;
 }) {
     const { username, repoName } = params;
     const data = {
