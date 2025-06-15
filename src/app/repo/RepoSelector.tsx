@@ -30,14 +30,14 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
         const data = {
             repoToken, repoOwner, selected
         }
-        console.log("Selected Repo is: ", selected);
+        // console.log("Selected Repo is: ", selected);
 
         try {
             const cloneRepo = await fetch('/api/cloneRepo', {
                 method: 'POST',
                 body: JSON.stringify(data)
             })
-            console.log("Response after Cloning Repo: ", cloneRepo);
+            // console.log("Response after Cloning Repo: ", cloneRepo);
 
             if (cloneRepo.ok) {
 
@@ -59,7 +59,7 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
                 router.push(`/${repoOwner}/${selected}/codeSuggestion`);
             }
         } catch (error) {
-            console.log("Repo Clone Failed", error);
+            console.error("Repo Clone Failed", error);
         } finally {
             setLoading(false);
         }

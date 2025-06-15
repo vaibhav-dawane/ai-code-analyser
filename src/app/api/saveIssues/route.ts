@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const issuesFound = data.response;
     const repoName = data.repoName;
-    console.log("Data received in saveIssues Route: ", issuesFound);
+    // console.log("Data received in saveIssues Route: ", issuesFound);
 
     const session = await getServerSession(authOptions);
 
