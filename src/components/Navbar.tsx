@@ -12,7 +12,7 @@ export function Navbar() {
         if (session.status === 'authenticated') {
             setIsSignIn(true);
         }
-    }, []);
+    }, [session.status]);
 
     return (
         <div className="w-full max-w-screen flex justify-end relative">

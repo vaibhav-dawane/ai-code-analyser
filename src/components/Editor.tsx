@@ -45,7 +45,7 @@ function calculateTotal(items) {
         }, 4000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [steps.length]);
 
     return (
         <div className="w-full max-w-screen flex justify-center">

@@ -1,29 +1,26 @@
 import ShowIssues from "./ShowIssues";
+export const dynamic = 'force-dynamic';
 
-interface Params {
-  username: string;
-  repoName: string;
-}
+export default async function codeSuggestion({ params }: { params: Promise<{ username: string, repoName: string }> }) {
+  const { username, repoName } = await params;
+  const data = {
+    username,
+    repoName
+  }
 
-export default async function codeSuggestion({
-  params,
-}: {
-  params: Params;
-}) {
-    const { username, repoName } = params;
-    const data = {
-        username,
-        repoName
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+  const res = await fetch(`${baseUrl}/api/getIssues`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
     }
+  })
+  const result = await res.json();
+  // console.log("Data received in getIssue: ", result.issues.issues);
 
-    const res = await fetch('http://localhost:3000/api/getIssues', {
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    const result = await res.json();
-    // console.log("Data received in getIssue: ", result.issues.issues);
-    
-    return (
-        <ShowIssues repoIssues={result.issues.issues}/>
-    );
+  return (
+    <ShowIssues repoIssues={result.issues.issues} />
+  );
 }
