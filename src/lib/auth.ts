@@ -1,6 +1,5 @@
 import prisma from "@/lib/prisma";
 import NextAuth from "next-auth"
-// @ts-expect-error — suppress TS error temporarily
 import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github"
 
