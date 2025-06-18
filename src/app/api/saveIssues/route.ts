@@ -2,7 +2,6 @@ import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
-import { Session } from "next-auth";
 
 export async function POST(req: NextRequest) {
     const data = await req.json();
@@ -11,11 +10,13 @@ export async function POST(req: NextRequest) {
     // console.log("Data received in saveIssues Route: ", issuesFound);
 
     // const session = await getServerSession(authOptions);
-    const session: Session | null = await getServerSession(authOptions);
-    console.log("Session in saveIssues API route: ", session);
-    if (!session || !session.username) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || typeof session.username !== "string") {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+    // console.log("Session in saveIssues API route: ", session);
+    
     // const uname = session.username;
     const user = await prisma.user.findUnique({
         where: { username: session?.username },
