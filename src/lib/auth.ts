@@ -1,7 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import NextAuth from "next-auth"
+// @ts-expect-error — suppress TS error temporarily
+import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github"
-const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -21,11 +22,11 @@ export const authOptions: NextAuthOptions = {
     async signIn({ profile, user, account }) {
       const githubProfile = profile as { login: string };
 
-      if(!githubProfile.login){
+      if (!githubProfile.login) {
         console.log("User is not there");
         return false;
       }
-      
+
       await prisma.user.upsert({
         where: { username: githubProfile.login },
         update: {
@@ -52,8 +53,10 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.username = token.username;
-      session.accessToken = token.accessToken;
+      if (session?.user) {
+        session.username = token.username as string;
+        session.accessToken = token.accessToken as string;
+      }
       return session;
     }
   },
