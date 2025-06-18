@@ -50,7 +50,7 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
 
                 if (results.response) {
                     results.repoName = selected;
-                    await fetch('api/saveIssues', {
+                    await fetch('/api/saveIssues', {
                         method: 'POST',
                         body: JSON.stringify(results)
                     })

@@ -8,8 +8,10 @@ export default async function codeSuggestion({ params }: { params: Promise<{ use
     repoName
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXTAUTH_URL
+      : "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/getIssues`, {
     method: 'POST',
     body: JSON.stringify(data),

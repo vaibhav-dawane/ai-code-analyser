@@ -3,13 +3,18 @@ import RepoSelector from "./RepoSelector";
 
 const ReposPage = async () => {
     const cookieStore = await cookies();
-    const res = await fetch("http://localhost:3000/api/getRepos", {
+
+    const baseUrl =
+        process.env.NODE_ENV === "production"
+            ? process.env.NEXTAUTH_URL
+            : "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/getRepos`, {
         method: 'GET',
         headers: {
             cookie: cookieStore.toString()
         }
     });
-    
+
     if (!res.ok) {
         console.error("Failed to fetch repositories", res.text());
         return <div>Error loading repositories</div>;
