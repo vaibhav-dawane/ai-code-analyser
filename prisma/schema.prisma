@@ -23,4 +23,6 @@ model Issue {
   userId   String
   repoName String
   issues   Json
+
+  @@unique([userId, repoName])
 }

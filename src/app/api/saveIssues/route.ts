@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     // console.log("Session in saveIssues API route: ", session);
-    
+
     // const uname = session.username;
     const user = await prisma.user.findUnique({
         where: { username: session?.username },
@@ -35,8 +35,17 @@ export async function POST(req: NextRequest) {
             }
         })
     } else {
-        await prisma.issue.create({
-            data: {
+        await prisma.issue.upsert({
+            where: {
+                userId_repoName: {
+                    userId: user.id,
+                    repoName: repoName
+                }
+            },
+            update: {
+                issues: data.response,
+            },
+            create: {
                 userId: user.id,
                 issues: data.response,
                 repoName: repoName

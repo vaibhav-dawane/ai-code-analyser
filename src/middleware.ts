@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server'
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl
-    const privatePath = ['/api/chat', '/api/getRepos', '/api/cloneRepo', '/api/auth', '/repo',];
+    const privatePath = ['/api/readRepo', '/api/getRepos', '/api/cloneRepo', '/api/auth', '/repo',];
     const publicPath = ['/signin'];
 
     const token = await getToken({req, secret: process.env.NEXTAUTH_SECRET});
@@ -26,7 +26,7 @@ export async function middleware(req: NextRequest) {
 // See "Matching Paths" below to learn more
 export const config = {
     matcher: [
-        '/api/chat',
+        '/api/readRepo',
         '/api/getRepos',
         '/api/cloneRepo',
         '/api/auth',

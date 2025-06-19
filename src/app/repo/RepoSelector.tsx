@@ -15,6 +15,7 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
 
     const repoToken = session?.accessToken as string;
     const repoOwner = session?.username as string;
+    const branch = "main";
 
     const [loading, setLoading] = useState(false);
 
@@ -28,36 +29,28 @@ export default function RepoSelector({ repoNames }: { repoNames: string[] }) {
         }
         setLoading(true);
         const data = {
-            repoToken, repoOwner, selected
+            repoToken, repoOwner, selected, branch
         }
         // console.log("Selected Repo is: ", selected);
 
         try {
-            const cloneRepo = await fetch('/api/cloneRepo', {
+            const res = await fetch('/api/readRepo', {
                 method: 'POST',
                 body: JSON.stringify(data)
             })
-            // console.log("Response after Cloning Repo: ", cloneRepo);
 
-            if (cloneRepo.ok) {
+            const results = await res.json();
 
-                const res = await fetch('/api/chat', {
+            if (results.response) {
+                results.repoName = selected;
+                await fetch('/api/saveIssues', {
                     method: 'POST',
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(results)
                 })
-
-                const results = await res.json();
-
-                if (results.response) {
-                    results.repoName = selected;
-                    await fetch('/api/saveIssues', {
-                        method: 'POST',
-                        body: JSON.stringify(results)
-                    })
-                }
-                toast.success("Repository Analysed Successfully");
-                router.push(`/${repoOwner}/${selected}/codeSuggestion`);
             }
+            toast.success("Repository Analysed Successfully");
+            router.push(`/${repoOwner}/${selected}/codeSuggestion`);
+
         } catch (error) {
             console.error("Repo Clone Failed", error);
         } finally {

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export function Navbar() {
     const session = useSession();
-    console.log("Accessing session in VortexDemo: ", session);
 
     const [isSignIn, setIsSignIn] = useState(false);
 
